@@ -146,6 +146,9 @@ EMAIL_HOST_PASSWORD = 'taiw jfyg siur jymm'
 LOGIN_URL = 'login'
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
-# إعدادات أمان إضافية
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+# أضف هذا في نهاية settings.py
+if not DEBUG:
+    # هذا يخبر WhiteNoise بخدمة ملفات الميديا في بيئة الإنتاج
+    import os
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
