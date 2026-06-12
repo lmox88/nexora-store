@@ -29,7 +29,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 SECRET_KEY = 'django-insecure-xul7#nwn+^ha$!f*uq59^(88)@#v11=@1h-4%bc^dp0%@*xeoh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = [
     'softpalm-store.onrender.com',
     '.onrender.com',
