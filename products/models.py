@@ -20,7 +20,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     # تأكد من هذا الجزء في models.py
-    image = models.ImageField(upload_to='products/')
     def __str__(self):
         return self.name
 class ProductImage(models.Model):
