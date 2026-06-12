@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'cart',
     'orders',
 ]
-
+TEMPLATES = [ { 'BACKEND': 'django.template.backends.django.DjangoTemplates', 'DIRS': [BASE_DIR / 'templates'], 'APP_DIRS': True, 'OPTIONS': { 'context_processors': [ 'cart.context_processors.cart_counter', 'django.template.context_processors.request', 'django.contrib.auth.context_processors.auth', 'django.contrib.messages.context_processors.messages', ], }, }, ]
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dn0fja5vs',
     'API_KEY': '321471359398461',
