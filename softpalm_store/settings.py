@@ -41,6 +41,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '321471359398461',
     'API_SECRET': 'Pc3_p9hBnceyNlEn4osbiY4g9AI',
 }
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Application definition
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
+    'cloudinary',
     'cloudinary_storage',
     'cloudinary',
 ]
