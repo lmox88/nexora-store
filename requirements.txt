@@ -2,7 +2,9 @@ asgiref==3.11.1
 certifi==2026.5.20
 chardet==3.0.4
 charset-normalizer==3.4.7
+cloudinary==1.44.2
 Django==5.2.15
+django-cloudinary-storage==0.3.0
 django-countries==5.3.3
 django-crispy-forms==1.7.2
 gunicorn==26.0.0
@@ -15,6 +17,7 @@ python-decouple==3.1
 python-dotenv==1.2.2
 pytz==2018.5
 requests==2.34.2
+six==1.17.0
 sqlparse==0.5.5
 stripe==15.2.0
 typing_extensions==4.15.0
