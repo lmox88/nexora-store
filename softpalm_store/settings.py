@@ -16,7 +16,17 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dn0fja5vs',
+    'API_KEY': '321471359398461',
+    'API_SECRET': 'Pc3_p9hBnceyNlEn4osbiY4g9AI',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,12 +46,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost'
 ]
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dn0fja5vs',
-    'API_KEY': '321471359398461',
-    'API_SECRET': 'Pc3_p9hBnceyNlEn4osbiY4g9AI',
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Application definition
 
