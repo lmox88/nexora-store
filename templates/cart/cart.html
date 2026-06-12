@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4">🧺 Your Cart</h2>
+
+{% if items %}
+
+<div class="card-ui">
+
+    <table class="table-ui">
+
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for item in items %}
+        <tr>
+
+            <!-- Product Name (link to detail) -->
+            <td>
+                <a href="{% url 'product_detail' item.product.id %}"
+                   class="text-dark text-decoration-none fw-medium">
+                    {{ item.product.name }}
+                </a>
+            </td>
+
+            <!-- Price -->
+            <td>{{ item.product.price }} SAR</td>
+
+            <!-- Quantity Controls -->
+            <td>
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <!-- minus -->
+                    <a href="{% url 'decrease_quantity' item.product.id %}"
+                       class="text-dark text-decoration-none fs-5">
+                        −
+                    </a>
+
+                    <span class="px-2">{{ item.qty }}</span>
+
+                    <!-- plus -->
+                    <a href="{% url 'add_to_cart' item.product.id %}"
+                       class="text-dark text-decoration-none fs-5">
+                        +
+                    </a>
+
+                </div>
+
+            </td>
+
+            <!-- Subtotal -->
+            <td>
+                {{ item.subtotal }} SAR
+            </td>
+
+            <!-- Delete -->
+            <td>
+                <a href="{% url 'remove_from_cart' item.product.id %}"
+                   class="text-dark text-decoration-none fs-5"
+                   onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا المنتج من السلة؟')">
+                    🗑
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- TOTAL -->
+<div class="mt-4 text-end">
+    <h4>Total: {{ total }} SAR</h4>
+    <div class="mt-3">
+
+    <a href="{% url 'checkout' %}"
+       class="btn-soft btn-primary-soft">
+        Proceed to Checkout
+    </a>
+
+</div>
+</div>
+
+{% else %}
+
+<div class="text-center mt-5">
+
+    <h5 class="text-muted-soft">Your cart is empty 🪹</h5>
+
+    <a href="{% url 'product_list' %}"
+       class="btn-soft btn-primary-soft mt-3">
+        ← Continue Shopping
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

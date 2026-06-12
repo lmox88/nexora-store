@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h3>📦 Order {{ order.order_number }}</h3>
+
+    <p><strong>Date:</strong> {{ order.created_at }}</p>
+    <p><strong>Total:</strong> {{ order.total }} SAR</p>
+
+    <hr>
+
+    <h5>Items:</h5>
+
+    {% for item in order.items.all %}
+
+        <div class="card p-3 mb-2">
+
+            <p><strong>{{ item.product_name }}</strong></p>
+            <p>{{ item.quantity }} x {{ item.price }} SAR</p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

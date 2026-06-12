@@ -1,0 +1,17 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar فقط */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Hero فقط */
+.hero {
+    background: linear-gradient(135deg, #111, #333);
+    color: white;
+    padding: 80px 20px;
+    border-radius: 10px;
+}

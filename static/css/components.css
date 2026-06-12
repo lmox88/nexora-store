@@ -1,0 +1,206 @@
+/* =========================
+   SoftPalm UI Components
+   Clean Design System
+========================= */
+
+/* ===== BUTTONS ===== */
+/* =========================
+   FOOTER
+========================= */
+
+.footer-custom {
+    margin-top: 80px;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 60px 0 30px;
+}
+
+.footer-logo {
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-text {
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #374151;
+    transition: .2s;
+}
+
+.footer-links a:hover {
+    color: #111827;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 14px;
+}
+.btn-soft {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    border: none;
+}
+
+/* Primary Button (Main Action) */
+.btn-primary-soft {
+    background: #111;
+    color: #fff;
+}
+
+.btn-primary-soft:hover {
+    background: #333;
+}
+
+/* Secondary Button */
+.btn-secondary-soft {
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #111;
+}
+
+.btn-secondary-soft:hover {
+    background: #f5f5f5;
+}
+
+/* Danger Button */
+.btn-danger-soft {
+    background: #111;
+    color: #fff;
+    opacity: 0.85;
+}
+
+.btn-danger-soft:hover {
+    opacity: 0.65;
+}
+
+
+/* ===== CARDS ===== */
+
+.card-ui {
+    background: #fff;
+    border-radius: 14px;
+
+    padding: 16px;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+
+    transition: 0.2s ease;
+}
+
+.card-ui:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+
+/* ===== BADGES ===== */
+
+.badge-soft {
+    display: inline-block;
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-success-soft {
+    background: #e6f7ee;
+    color: #1a7f37;
+}
+
+.badge-warning-soft {
+    background: #fff4e5;
+    color: #b45309;
+}
+
+.badge-dark-soft {
+    background: #111;
+    color: #fff;
+}
+
+
+/* ===== INPUTS ===== */
+
+.input-soft {
+    width: 100%;
+    padding: 8px 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.input-soft:focus {
+    border-color: #111;
+}
+
+
+/* ===== TABLE ===== */
+
+.table-ui {
+    width: 100%;
+    background: #fff;
+
+    border-radius: 12px;
+    overflow: hidden;
+
+    border-collapse: collapse;
+}
+
+.table-ui th,
+.table-ui td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.table-ui tr:hover {
+    background: #fafafa;
+}
+
+
+/* ===== UTILITIES ===== */
+
+.text-muted-soft {
+    color: #888;
+    font-size: 13px;
+}
+
+.shadow-soft {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
