@@ -18,6 +18,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -26,12 +27,8 @@ SECRET_KEY = 'django-insecure-xul7#nwn+^ha$!f*uq59^(88)@#v11=@1h-4%bc^dp0%@*xeoh
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = [
-    'softpalm-store.onrender.com',
-    '.onrender.com',
-    '127.0.0.1',
-    'localhost'
-]
+
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,7 +48,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',  # 👈 مهم
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
