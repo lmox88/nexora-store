@@ -145,13 +145,13 @@ def payment_success(request):
     items_text = ""
     total = 0
 
-    # 1️⃣ إنشاء الطلب
+    # 1️⃣ إنشاء الطلب أولاً
     order = Order.objects.create(
         user=request.user,
         total=0
     )
 
-    # 2️⃣ إنشاء عناصر الطلب
+    # 2️⃣ إنشاء المنتجات داخل الطلب
     for product_id, qty in cart.items():
         product = Product.objects.get(id=product_id)
 
@@ -167,21 +167,27 @@ def payment_success(request):
 
         items_text += f"- {product.name} x {qty} = {subtotal} SAR\n"
 
-    # 3️⃣ تحديث الإجمالي
+    # 3️⃣ تحديث إجمالي الطلب
     order.total = total
     order.save()
 
-    # 4️⃣ إرسال الإيميل (صح هنا)
-    try:
-        send_mail(
-            subject="🧾 Order Confirmation - Nexora",
-            message="Thanks for your order 🎉",
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[request.user.email],
-            fail_silently=True,
-        )
-    except Exception as e:
-        print("Email error:", e)
+    # 4️⃣ إرسال الإيميل
+    send_mail(
+        subject="🧾 Order Confirmation - Nexora",
+        message=f"""
+Thank you for your order 🎉
+
+Items:
+{items_text}
+
+Total: {total} SAR
+
+We are processing your order now.
+        """,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[request.user.email],
+        fail_silently=False,
+    )
 
     # 5️⃣ تفريغ السلة
     request.session['cart'] = {}
