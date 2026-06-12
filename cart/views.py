@@ -172,22 +172,17 @@ def payment_success(request):
     order.save()
 
     # 4️⃣ إرسال الإيميل
+
+try:
     send_mail(
         subject="🧾 Order Confirmation - Nexora",
-        message=f"""
-Thank you for your order 🎉
-
-Items:
-{items_text}
-
-Total: {total} SAR
-
-We are processing your order now.
-        """,
+        message="Thanks for your order 🎉",
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[request.user.email],
-        fail_silently=False,
+        fail_silently=True,  # 👈 هنا التعديل المهم
     )
+except Exception as e:
+    print("Email error:", e)
 
     # 5️⃣ تفريغ السلة
     request.session['cart'] = {}
