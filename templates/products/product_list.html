@@ -1,48 +1,46 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %} {% block content %}
 
 <h2 class="mb-4">Our Products</h2>
 
 <div class="row">
 
     {% for product in products %}
-    <div class="card-ui h-100 d-flex flex-column">
+    <div class="col-md-4 mb-4"> <div class="card-ui h-100 d-flex flex-column">
 
-    <!-- IMAGE -->
-    <div class="text-center mb-3">
-        {% if product.images.all %}
-            <img src="{{ product.images.all.0.image.url }}"
-                 style="height:180px; width:100%; object-fit:cover; border-radius:12px;">
-        {% else %}
-            <div style="height:180px; background:#eee; border-radius:12px;"></div>
-        {% endif %}
+            <div class="text-center mb-3">
+                {% if product.images.all %}
+                    <img src="{{ product.images.all.0.image.url }}" 
+                         alt="{{ product.name }}"
+                         style="height:180px; width:100%; object-fit:cover; border-radius:12px;">
+                {% else %}
+                    <img src="{% static 'images/default-product.png' %}" 
+                         alt="No image"
+                         style="height:180px; width:100%; object-fit:cover; border-radius:12px;">
+                {% endif %}
+            </div>
+
+            <div class="flex-grow-1 text-center">
+                <h6>
+                    <a href="{% url 'product_detail' product.id %}" 
+                       class="text-dark text-decoration-none">
+                        {{ product.name }}
+                    </a>
+                </h6>
+                <p class="text-muted-soft">
+                    {{ product.price }} SAR
+                </p>
+            </div>
+
+            <div class="d-grid">
+                <a href="{% url 'add_to_cart' product.id %}" 
+                   class="btn-soft btn-primary-soft">
+                    Add to Cart
+                </a>
+            </div>
+
+        </div>
     </div>
-
-    <!-- CONTENT -->
-    <div class="flex-grow-1 text-center">
-
-        <h6>
-            <a href="{% url 'product_detail' product.id %}"
-               class="text-dark text-decoration-none">
-                {{ product.name }}
-            </a>
-        </h6>
-
-        <p class="text-muted-soft">
-            {{ product.price }} SAR
-        </p>
-
-    </div>
-
-    <!-- BUTTON -->
-    <div class="d-grid">
-        <a href="{% url 'add_to_cart' product.id %}"
-           class="btn-soft btn-primary-soft">
-            Add to Cart
-        </a>
-    </div>
-
-</div>
     {% endfor %}
 
 </div>
