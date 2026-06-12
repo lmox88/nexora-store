@@ -33,10 +33,19 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost'
 ]
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dn0fja5vs',
+    'API_KEY': '321471359398461',
+    'API_SECRET': 'Pc3_p9hBnceyNlEn4osbiY4g9AI',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
