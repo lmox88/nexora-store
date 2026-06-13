@@ -49,11 +49,13 @@ verification email for order completion:
 🔑 Demo Accounts
 
 - 👤 Test User
+  
 Username: testuser
 
 Password: test123456
 
 - 💳 Stripe Test Card
+  
 Card Number: 4242 4242 4242 4242
 
 Expiry: 12/30
