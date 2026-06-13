@@ -149,35 +149,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعدادات الإيميل (سوف تستخدمين بيانات Mailtrap هنا في Render)
-# في settings.py
-# نستخدم الـ Console في بيئة الإنتاج على Render لتجنب مشاكل الاتصال الخارجي
-# if os.environ.get('RENDER'):
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# else:
-#     # محلياً على جهازك استخدمي الـ SMTP الطبيعي
-#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#     EMAIL_HOST = 'smtp.mailtrap.io'
-#     EMAIL_PORT = 587
-#     EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-#     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-#     EMAIL_USE_TLS = True
 
-# إعدادات الإيميل لـ Mailtrap
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST') # تأكدي أن هذه القيمة هي sandbox.smtp.mailtrap.io
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587)) # تحويلها لـ integer
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-# اجعلي هذا الإيميل موحداً:
 DEFAULT_FROM_EMAIL = 'noreply@softpalm.com' 
 EMAIL_TIMEOUT = 10
 
 LOGIN_URL = 'login'
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
-# أضف هذا في نهاية settings.py
+
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
@@ -185,10 +170,9 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
-# في settings.py
+
 CSRF_TRUSTED_ORIGINS = ['https://softpalm-store.onrender.com']
 
-# تأكدي أيضاً من إضافة هذه الإعدادات للأمان:
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True

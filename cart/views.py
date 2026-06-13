@@ -3,11 +3,11 @@ from products.models import Product
 from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
-
 from django.urls import reverse
 from django.core.mail import send_mail
 from orders.models import Order, OrderItem
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 @login_required
 def checkout(request):
 
@@ -72,7 +72,8 @@ def add_to_cart(request, product_id):
 
     request.session['cart'] = cart
 
-    return redirect('cart')   # 👈 بدل products
+    return redirect('cart')   
+
 def decrease_quantity(request, product_id):
     cart = request.session.get('cart', {})
 
@@ -137,7 +138,6 @@ def create_checkout_session(request):
 
     return redirect(checkout_session.url)
 
-@login_required
 @login_required
 def payment_success(request):
     cart = request.session.get('cart', {})
