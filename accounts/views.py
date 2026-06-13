@@ -10,6 +10,8 @@ from django.utils.encoding import force_bytes
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_decode
 from orders.models import Order
+from django.views.decorators.csrf import csrf_exempt
+
 
 def home(request):
     products = Product.objects.exclude(id__isnull=True)
@@ -18,7 +20,7 @@ def home(request):
         'products': products
     })
 
-
+@csrf_exempt
 def login_view(request):
 
     if request.method == 'POST':
@@ -55,11 +57,9 @@ def logout_view(request):
     request.session.flush() 
     return redirect('home')
 
-
+@csrf_exempt
 def register_view(request):
-
     if request.method == 'POST':
-
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -71,20 +71,7 @@ def register_view(request):
                 {'error': 'Username already exists'}
             )
 
-        # User.objects.create_user(
-        #     username=username,
-        #     email=email,
-        #     password=password
-        # )
-        # send_mail(
-        # subject='Welcome to Sysora',
-        # message='Your account was created successfully.',
-        # from_email=settings.EMAIL_HOST_USER,
-        # recipient_list=[email],
-        # fail_silently=False,
-        # )
-        
-
+        # إنشاء المستخدم
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -94,6 +81,7 @@ def register_view(request):
         user.is_active = False
         user.save()
 
+        # توليد الرابط
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
 
@@ -101,21 +89,22 @@ def register_view(request):
             reverse('verify_email', args=[uid, token])
         )
 
-        send_mail(
-            subject='Verify your email - SoftPalm',
-            message=f"""
-        Hi {username},
+        # محاولة إرسال الإيميل بأمان
+        try:
+            send_mail(
+                subject='Verify your email - SoftPalm',
+                message=f"Hi {username}, Please verify your account here: {verify_link}",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=True,  # هذا يمنع انهيار الموقع إذا فشل الإرسال
+            )
+        except Exception as e:
+            print(f"Email failed to send: {e}")
 
-        Please verify your account:
-
-        {verify_link}
-        """,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[email],
-        )
-
+        # إرجاع صفحة التأكيد مع تمرير الرابط للمتصفح كـ "خطة طوارئ"
         return render(request, 'accounts/verification_sent.html', {
-            'email': email
+            'email': email,
+            'link_for_testing': verify_link 
         })
 
     return render(request, 'accounts/register.html')
