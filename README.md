@@ -7,8 +7,10 @@ You can visit the live version of the project here:
 
 📧 Email Verification Proof
 The system uses Mailtrap for email testing. Below is the screenshots :
+
 verification email for registration:
 <img width="1905" height="862" alt="لقطة شاشة 2026-06-13 083200" src="https://github.com/user-attachments/assets/44390dd0-9430-4fc5-89a1-b6db97687807" />
+
 verification email for order completion:
 <img width="1911" height="857" alt="لقطة شاشة 2026-06-13 085048" src="https://github.com/user-attachments/assets/959e98c0-fb72-4ca6-84b0-6e537c18b396" />
 
