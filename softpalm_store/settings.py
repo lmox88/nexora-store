@@ -163,16 +163,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 #     EMAIL_USE_TLS = True
 
+# إعدادات الإيميل لـ Mailtrap
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.environ.get('EMAIL_HOST') # تأكدي أن هذه القيمة هي sandbox.smtp.mailtrap.io
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587)) # تحويلها لـ integer
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-
-# إضافة هامة لـ Postmark
+# اجعلي هذا الإيميل موحداً:
+DEFAULT_FROM_EMAIL = 'noreply@softpalm.com' 
 EMAIL_TIMEOUT = 10
-DEFAULT_FROM_EMAIL = '431201647@qu.edu.sa' # ضعي الإيميل الذي وثقتِه في Postmark
 
 LOGIN_URL = 'login'
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")

@@ -5,33 +5,28 @@ from products.models import Product
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.urls import reverse
-from django.utils.http import urlsafe_base64_decode
 from orders.models import Order
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     products = Product.objects.exclude(id__isnull=True)
-
     return render(request, 'home.html', {
         'products': products
     })
 
 
 def login_view(request):
-
     if request.method == 'POST':
-
         username = request.POST['username']
         password = request.POST['password']
-
         user = authenticate(
             request,
             username=username,
             password=password
         )
-
 
         if user is None:
             return render(request, 'accounts/login.html', {
@@ -43,7 +38,6 @@ def login_view(request):
                 'error': 'Please verify your email before login'
             })
 
-        # ✅ نجاح
         login(request, user)
         return redirect('home')
 
@@ -75,31 +69,29 @@ def register_view(request):
             email=email,
             password=password
         )
-
         user.is_active = False
         user.save()
 
         # توليد الرابط
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
-
         verify_link = request.build_absolute_uri(
             reverse('verify_email', args=[uid, token])
         )
 
-        # محاولة إرسال الإيميل بأمان
+        # إرسال الإيميل عبر Mailtrap
         try:
             send_mail(
                 subject='Verify your email - SoftPalm',
                 message=f"Hi {username}, Please verify your account here: {verify_link}",
-                from_email=settings.EMAIL_HOST_USER,
+                from_email='noreply@softpalm.com', # إيميل افتراضي لـ Mailtrap
                 recipient_list=[email],
-                fail_silently=True,  # هذا يمنع انهيار الموقع إذا فشل الإرسال
+                fail_silently=False, 
             )
         except Exception as e:
-            print(f"Email failed to send: {e}")
+            print(f"!!! EMAIL ERROR: {e}")
 
-        # إرجاع صفحة التأكيد مع تمرير الرابط للمتصفح كـ "خطة طوارئ"
+        # إرجاع صفحة التأكيد مع رابط التفعيل للاختبار
         return render(request, 'accounts/verification_sent.html', {
             'email': email,
             'link_for_testing': verify_link 
@@ -108,9 +100,7 @@ def register_view(request):
     return render(request, 'accounts/register.html')
 
 
-
 def verify_email(request, uidb64, token):
-
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User.objects.get(pk=uid)
@@ -120,18 +110,15 @@ def verify_email(request, uidb64, token):
     if user and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-
         login(request, user)
         return redirect('home')
 
     return render(request, 'invalid_token.html')
-from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def profile_view(request):
-
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
-
     return render(request, 'accounts/profile.html', {
         'orders': orders
     })
