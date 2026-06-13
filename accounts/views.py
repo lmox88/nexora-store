@@ -10,8 +10,6 @@ from django.utils.encoding import force_bytes
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_decode
 from orders.models import Order
-from django.views.decorators.csrf import csrf_exempt
-
 
 def home(request):
     products = Product.objects.exclude(id__isnull=True)
@@ -20,7 +18,7 @@ def home(request):
         'products': products
     })
 
-@csrf_exempt
+
 def login_view(request):
 
     if request.method == 'POST':
@@ -57,7 +55,7 @@ def logout_view(request):
     request.session.flush() 
     return redirect('home')
 
-@csrf_exempt
+
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']

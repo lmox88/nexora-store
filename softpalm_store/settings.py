@@ -167,3 +167,10 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+# في settings.py
+CSRF_TRUSTED_ORIGINS = ['https://softpalm-store.onrender.com']
+
+# تأكدي أيضاً من إضافة هذه الإعدادات للأمان:
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
