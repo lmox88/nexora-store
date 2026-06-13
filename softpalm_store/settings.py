@@ -17,7 +17,7 @@ import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+from django.contrib.auth.models import User
 load_dotenv()
 
 load_dotenv()
@@ -168,3 +168,5 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
