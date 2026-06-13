@@ -138,56 +138,43 @@ def create_checkout_session(request):
     return redirect(checkout_session.url)
 
 @login_required
+@login_required
 def payment_success(request):
-
     cart = request.session.get('cart', {})
-
     items_text = ""
     total = 0
 
-    # 1️⃣ إنشاء الطلب أولاً
-    order = Order.objects.create(
-        user=request.user,
-        total=0
-    )
+    # 1️⃣ إنشاء الطلب
+    order = Order.objects.create(user=request.user, total=0)
 
     # 2️⃣ إنشاء المنتجات داخل الطلب
     for product_id, qty in cart.items():
         product = Product.objects.get(id=product_id)
-
         subtotal = product.price * qty
         total += subtotal
-
         OrderItem.objects.create(
             order=order,
             product_name=product.name,
             price=product.price,
             quantity=qty
         )
-
         items_text += f"- {product.name} x {qty} = {subtotal} SAR\n"
 
     # 3️⃣ تحديث إجمالي الطلب
     order.total = total
     order.save()
 
-    # 4️⃣ إرسال الإيميل
-    send_mail(
-        subject="🧾 Order Confirmation - Nexora",
-        message=f"""
-Thank you for your order 🎉
-
-Items:
-{items_text}
-
-Total: {total} SAR
-
-We are processing your order now.
-        """,
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[request.user.email],
-        fail_silently=False,
-    )
+    # 4️⃣ إرسال الإيميل (مع خاصية fail_silently=True)
+    try:
+        send_mail(
+            subject="🧾 Order Confirmation - Nexora",
+            message=f"Thank you for your order! Total: {total} SAR",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[request.user.email],
+            fail_silently=True,  # <--- هذا هو السطر الأهم
+        )
+    except Exception as e:
+        print(f"Email failed, but order was created: {e}")
 
     # 5️⃣ تفريغ السلة
     request.session['cart'] = {}
