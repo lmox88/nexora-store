@@ -29,26 +29,29 @@ verification email for order completion:
 
 - 👤 User Dashboard: Profile management and order history tracking.
 
+
 🛠 Tech Stack
-Framework: Django (Python)
 
-Database: PostgreSQL (on Render)
+- Framework: Django (Python)
 
-Media Storage: Cloudinary
+- Database: PostgreSQL (on Render)
 
-Payment Gateway: Stripe API (Test Mode)
+- Media Storage: Cloudinary
 
-Email Testing: Mailtrap (SMTP Sandbox)
+- Payment Gateway: Stripe API (Test Mode)
 
-Deployment: Render & WhiteNoise
+- Email Testing: Mailtrap (SMTP Sandbox)
+
+- Deployment: Render & WhiteNoise
 
 🔑 Demo Accounts
-👤 Test User
+
+- 👤 Test User
 Username: testuser
 
 Password: test123456
 
-💳 Stripe Test Card
+- 💳 Stripe Test Card
 Card Number: 4242 4242 4242 4242
 
 Expiry: 12/30
@@ -56,20 +59,23 @@ Expiry: 12/30
 CVC: 123
 
 📦 Project Structure
-accounts: User registration, login, and email verification logic.
 
-products: Product catalog and browsing functionality.
+- accounts: User registration, login, and email verification logic.
 
-cart: Shopping cart management using session data.
+- products: Product catalog and browsing functionality.
 
-orders: Order processing and history tracking.
+- cart: Shopping cart management using session data.
+
+- orders: Order processing and history tracking.
 
 🔐 Security & Deployment
-Environment Variables: All sensitive keys (Stripe, Cloudinary, Email) are secured using .env files.
 
-Static Files: Compressed and served using WhiteNoise.
+- Environment Variables: All sensitive keys (Stripe, Cloudinary, Email) are secured using .env files.
 
-Media Hosting: Files are stored in the cloud using Cloudinary.
+- Static Files: Compressed and served using WhiteNoise.
+
+- Media Hosting: Files are stored in the cloud using Cloudinary.
 
 👨‍💻 Author
+
 Developed by: Laila Albusayr
