@@ -152,16 +152,27 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # إعدادات الإيميل (سوف تستخدمين بيانات Mailtrap هنا في Render)
 # في settings.py
 # نستخدم الـ Console في بيئة الإنتاج على Render لتجنب مشاكل الاتصال الخارجي
-if os.environ.get('RENDER'):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    # محلياً على جهازك استخدمي الـ SMTP الطبيعي
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.mailtrap.io'
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-    EMAIL_USE_TLS = True
+# if os.environ.get('RENDER'):
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
+#     # محلياً على جهازك استخدمي الـ SMTP الطبيعي
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#     EMAIL_HOST = 'smtp.mailtrap.io'
+#     EMAIL_PORT = 587
+#     EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+#     EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+
+# إضافة هامة لـ Postmark
+EMAIL_TIMEOUT = 10
+DEFAULT_FROM_EMAIL = '431201647@qu.edu.sa' # ضعي الإيميل الذي وثقتِه في Postmark
 
 LOGIN_URL = 'login'
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
