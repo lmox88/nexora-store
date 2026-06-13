@@ -16,17 +16,18 @@ verification email for order completion:
 <img width="1911" height="857" alt="لقطة شاشة 2026-06-13 085048" src="https://github.com/user-attachments/assets/959e98c0-fb72-4ca6-84b0-6e537c18b396" />
 
 🚀 Features
-🔐 User Authentication: Secure registration, login, and email verification.
 
-🛒 Shopping Cart: Session-based cart for a smooth shopping experience.
+- 🔐 User Authentication: Secure registration, login, and email verification.
 
-💳 Stripe Integration: Secure payment processing (Test Mode).
+- 🛒 Shopping Cart: Session-based cart for a smooth shopping experience.
 
-📦 Order Management: Automated order creation and history tracking.
+- 💳 Stripe Integration: Secure payment processing (Test Mode).
 
-📧 Notification System: Automated emails for verification and order confirmation.
+- 📦 Order Management: Automated order creation and history tracking.
 
-👤 User Dashboard: Profile management and order history tracking.
+- 📧 Notification System: Automated emails for verification and order confirmation.
+
+- 👤 User Dashboard: Profile management and order history tracking.
 
 🛠 Tech Stack
 Framework: Django (Python)
