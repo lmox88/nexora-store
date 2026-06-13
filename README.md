@@ -1,7 +1,9 @@
 🛍️ Nexora Store
+
 Nexora Store is a modern, full-stack Django e-commerce web application. The platform provides a seamless shopping experience, including product browsing, shopping cart management, secure checkout, and automated email notifications.
 
 🔗 Live Demo
+
 You can visit the live version of the project here:
 👉 Click here to visit Nexora Store https://softpalm-store.onrender.com 
 (Note: Please use the test credentials below for demo purposes)
